@@ -1,0 +1,172 @@
+COM/B/01-03848/2022 -BRAVIN JOB
+COM/B/01-02872/2022 -KELVIN MUSYOKI
+COM/B/01-04873/2022 -ROBIN MUNYIRI
+COM/B/01-oo128/2022 -HELDON OTIENO
+
+
+CAT 1
+BCS 223
+DATA STRUCTURES.
+
+1.STACK IMPLEMENTATION BY ARRAY.
+class ArrayStack {
+ private int maxSize;
+ private int[] stackArray;
+ private int top;
+ public ArrayStack(int size) {
+ maxSize = size;
+ stackArray = new int[maxSize];
+ top = -1;
+ }
+ public void push(int value) {
+ if (top == maxSize - 1) {
+ System.out.println("Stack Overflow");
+ return;
+ }
+ stackArray[++top] = value;
+ }
+ public int pop() {
+ if (top == -1) {
+ System.out.println("Stack Underflow");
+ return 1;
+ }
+ return stackArray[top--];
+ }
+ public boolean isEmpty() {
+ return (top == -1);
+ }
+}
+
+
+ 2.STACK IMPLEMENTATION BY LINKED LISTS.
+ class Node {
+ int data;
+ Node next;
+ public Node(int data) {
+ this.data = data;
+ this.next = null;
+ }
+}
+class LinkedListStack {
+ private Node top;
+ public LinkedListStack() {
+ top = null;
+ }
+ public void push(int value) {
+ Node newNode = new Node(value);
+ newNode.next = top;
+ top = newNode;
+ }
+ public int pop() {
+ if (top == null) {
+ System.out.println("Stack Underflow");
+ return -1;
+ }
+ int value = top.data;
+ top = top.next;
+ return value;
+ }
+ public boolean isEmpty() {
+ return (top == null);
+ }
+}
+public class Main {
+ public static void main(String[] args) {
+ // Test array-based stack
+ ArrayStack arrayStack = new ArrayStack(5);
+ arrayStack.push(10);
+ arrayStack.push(20);
+ arrayStack.push(30);
+ System.out.println(arrayStack.pop()); // Output: 30
+ // Test linked list-based stack
+ LinkedListStack linkedListStack = new LinkedListStack();
+ linkedListStack.push(10);
+ linkedListStack.push(20);
+ linkedListStack.push(30);
+ System.out.println(linkedListStack.pop()); // Output: 30
+ }
+}
+
+
+3.QUEUE IMPLEMENTATION USING ARRAY.
+class ArrayQueue {
+ private int maxSize;
+ private int[] queueArray;
+ private int front;
+ private int rear;
+ private int nItems;
+ public ArrayQueue(int size) {
+ maxSize = size;
+queueArray = new int[maxSize];
+ front = 0;
+ rear = -1;
+ nItems = 0;
+ }
+ public void enqueue(int value) {
+ if (rear == maxSize - 1)
+ rear = -1;
+ queueArray[++rear] = value;
+ nItems++;
+ }
+ public int dequeue() {
+ int temp = queueArray[front++];
+ if (front == maxSize)
+ front = 0;
+ nItems--;
+ return temp;
+ }
+ public boolean isEmpty() {
+ return (nItems == 0);
+ }
+}
+
+
+4.QUEUE IMPLEMENTATION USING LINKED LISTS
+.class LinkedListQueue {
+ private Node front;
+ private Node rear;
+ public LinkedListQueue() {
+ front = null;
+ rear = null;
+ }
+ public void enqueue(int value) {
+ Node newNode = new Node(value);
+ if (rear == null) {
+ front = newNode;
+ rear = newNode;
+ } else {
+ rear.next = newNode;
+ rear = newNode;
+ }
+ }
+ public int dequeue() {
+ if (front == null) {
+ System.out.println("Queue is empty");
+ return -1;
+ }
+ int value = front.data;
+ front = front.next;
+ if (front == null)
+ rear = null;
+ return value;
+ }
+ public boolean isEmpty() {
+ return (front == null);
+ }
+}
+public class Main {
+ public static void main(String[] args) {
+ // Test array-based queue
+ ArrayQueue arrayQueue = new ArrayQueue(5);
+ arrayQueue.enqueue(10);
+ arrayQueue.enqueue(20);
+ arrayQueue.enqueue(30);
+ System.out.println(arrayQueue.dequeue()); // Output: 10
+ // Test linked list-based queue
+ LinkedListQueue linkedListQueue = new LinkedListQueue();
+ linkedListQueue.enqueue(10);
+ linkedListQueue.enqueue(20);
+ linkedListQueue.enqueue(30);
+ System.out.println(linkedListQueue.dequeue()); // Output: 10
+ }
+}
